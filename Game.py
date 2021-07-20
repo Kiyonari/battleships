@@ -98,5 +98,24 @@ class Board:
         if ship:
             ship.sunk = True
 
-    def exec_instruction(self, instruction: str) -> None:
-        pass
+    def exec_instruction(self, line: str) -> None:
+        pattern = re.compile(r"""
+        ( \( \d+ ,\s* \d+ \) )  # Position (x, y)
+        \s* ( [MRL]* )         # Any number of instructions
+        """, re.VERBOSE)
+        match = pattern.match(line)
+        position, instructions = match.groups()
+        sanitized = re.sub('[( )]', '', position)
+        x, y = sanitized.split(',')
+        position = Position(int(x), int(y))
+        if not instructions:
+            self.shoot(position)
+        else:
+            ship = self.get_ship(position)
+            for letter in instructions:
+                if letter == 'M':
+                    self.move(ship)
+                if letter == 'R':
+                    ship.rotate_right()
+                if letter == 'L':
+                    ship.rotate_left()

@@ -6,29 +6,23 @@ def main():
     with open("input.txt") as f:
         board_size = int(f.readline())
         ship_line = f.readline()
-        pattern = re.compile(r"""
-        (\(
-        \d+     # Position x
-        ,\s*    # Any number of spaces
-        \d+     # Position y
-        ,\s*    # Any number of spaces
-        [NSEW]  # Cardinal direction
-        \))
-        """, re.VERBOSE)
+        pattern = re.compile(r"""( \( \d+ ,\s* \d+ ,\s* [NSEW] \) )""", re.VERBOSE)
         match = pattern.findall(ship_line)
         instructions = [line[:-1] for line in f.readlines()]
 
     board = Board(board_size)
     for ship in match:
         board.add_ship(ship)
-    print(f"Board of size {board.size} created.")
-    print(f"{len(board.ships_list)} ships placed.")
 
     for line in instructions:
         board.exec_instruction(line)
 
-    sunken_ships = [ship for ship in board.ships_list if ship.sunk]
-    print(sunken_ships)
+    with open("output.txt", "w") as f:
+        for ship in board.ships_list:
+            state = ""
+            if ship.sunk:
+                state = " SUNK"
+            f.write(f"({ship.position.x}, {ship.position.y}, {ship.orientation}){state}\n")
 
 
 if __name__ == '__main__':
