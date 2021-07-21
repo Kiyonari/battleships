@@ -1,9 +1,13 @@
+import argparse
 import re
 from Game import Board
 
 
 def main():
-    with open("input.txt") as f:
+    parser = argparse.ArgumentParser(description='A game of battleships')
+    parser.add_argument('input', help="path to input file")
+    args = parser.parse_args()
+    with open(args.input) as f:
         board_size = int(f.readline())
         ship_line = f.readline()
         pattern = re.compile(r"""( \( \d+ ,\s* \d+ ,\s* [NSEW] \) )""", re.VERBOSE)
