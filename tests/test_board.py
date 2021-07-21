@@ -45,3 +45,13 @@ class TestBoard(TestCase):
         ship = self.board.get_ship(Position(1, 1))
         self.board.exec_instruction("(1, 1) MMMRM")
         self.assertEqual(ship.position, Position(4, 0))
+
+    def test_get_sunken_ship(self):
+        self.board.shoot(Position(1, 1))
+        ship = self.board.get_ship(Position(1, 1))
+        self.assertEqual(ship, None)
+
+    def test_move_sunken_ship(self):
+        ship = self.board.get_ship(Position(1, 1))
+        self.board.shoot(Position(1, 1))
+        self.assertRaises(ValueError, self.board.move, ship)

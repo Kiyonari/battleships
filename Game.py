@@ -64,7 +64,7 @@ class Board:
 
     def get_ship(self, position: Position) -> Optional[Ship]:
         for ship in self.ships_list:
-            if position == ship.position:
+            if position == ship.position and not ship.sunk:
                 return ship
         return None
 
@@ -75,7 +75,7 @@ class Board:
             raise IndexError("X or Y value must be positive")
 
         for ship in self.ships_list:
-            if position == ship.position:
+            if position == ship.position and not ship.sunk:
                 raise ValueError(f"A ship is already present at {position.x, position.y}")
 
         return True
@@ -89,6 +89,8 @@ class Board:
             self.ships_list.append(new_ship)
 
     def move(self, ship: Ship) -> None:
+        if ship.sunk:
+            raise ValueError(f"Ship in {ship.position} has been sunk!")
         new_pos = ship.position.move(ship.orientation)
         self.check_coordinates(new_pos)
         ship.position = new_pos
