@@ -16,17 +16,17 @@ A program that reads a file that represents
 Consider a square board of size N. Each cell can either be empty or be occupied by a ship. The position of a ship is defined by three parameters: an x-coordinate, a y-coordinate and an orientation (north, east, south, west).
 
 Once the initial state of the board is set up, any number of operations can occur. There are two types of operations:
-###Move a ship
+### Move a ship
 
 Specified by an initial coordinate and a series of movements which can be move forward (in the direction that ship is facing), rotate left, rotate right.
 
 A ship can navigate through an occupied cell. However, two ships cannot occupy the same cell at the end of a move operation.
 
-###Shoot down a ship
+### Shoot down a ship
 
 Specified by an x- and y-coordinate. If the cell is occupied, that ship is sunk and the cell can be occupied by another ship. If there is no ship, nothing happens.
 
-###Output File Example 
+### Output File Example 
 <pre>
 Output:
   (3, 1, N)
