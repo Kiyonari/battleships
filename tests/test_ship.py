@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.9
 from unittest import TestCase
 from Game import Ship, Position
 
