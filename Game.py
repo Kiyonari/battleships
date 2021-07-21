@@ -114,10 +114,11 @@ class Board:
             self.shoot(position)
         else:
             ship = self.get_ship(position)
-            for letter in instructions:
-                if letter == 'M':
-                    self.move(ship)
-                if letter == 'R':
-                    ship.rotate_right()
-                if letter == 'L':
-                    ship.rotate_left()
+            if ship:
+                for letter in instructions:
+                    if letter == 'M':
+                        self.move(ship)
+                    if letter == 'R':
+                        ship.rotate_right()
+                    if letter == 'L':
+                        ship.rotate_left()
