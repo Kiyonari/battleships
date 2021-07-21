@@ -1,4 +1,4 @@
-from copy import copy
+#!/usr/bin/env python3
 from dataclasses import dataclass
 from itertools import cycle, dropwhile
 import re

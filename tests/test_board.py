@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from unittest import TestCase
 
 from Game import Ship, Board, Position
